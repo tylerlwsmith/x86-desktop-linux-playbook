@@ -1,0 +1,9 @@
+roles:
+  - name: geerlingguy.docker
+    version: 4.1.1
+  - name: geerlingguy.nodejs
+    version: 6.0.0
+  - name: geerlingguy.pip
+    version: 2.1.0
+  - name: ngetchell.vscode
+    version: v1.0.3

@@ -1,0 +1,72 @@
+---
+- name: Setup Linux Laptop
+  hosts: all
+  connection: paramiko_ssh
+
+  roles:
+    - role: geerlingguy.nodejs
+      become: yes
+      vars:
+        nodejs_version: "16.x"
+        nodejs_npm_global_packages:
+          - name: tldr
+          - name: yarn
+    - role: geerlingguy.pip
+      become: yes
+      vars:
+        pip_install_packages:
+          - name: ansible
+    - role: geerlingguy.docker
+      become: yes
+    - role: ngetchell.vscode
+      become: yes
+      vars:
+        vscode_extension:
+          - ms-python.python
+          - ms-python.vscode-pylance
+          - ms-azuretools.vscode-docker
+          - mrmlnc.vscode-duplicate
+          - calebporzio.better-phpunit
+          - bungcip.better-toml
+          - clinyong.vscode-css-modules
+          - mrmlnc.vscode-duplicate
+          - bmewburn.vscode-intelephense-client
+          - esbenp.prettier-vscode
+          - bradlc.vscode-tailwindcss
+          - svelte.svelte-vscode
+
+  tasks:
+    - name: Update all packages
+      become: yes
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+
+    - name: Install packages
+      become: yes
+      ansible.builtin.package:
+        state: present
+        name:
+          - terminator
+          - vim
+
+    - name: Create projects directory
+      ansible.builtin.file:
+        path: ~/projects
+        state: directory
+
+    - name: Create contributions directory
+      ansible.builtin.file:
+        path: ~/contributions
+        state: directory
+
+    - name: Store current username
+      ansible.builtin.set_fact:
+        current_logged_in_user: "{{ ansible_user }}"
+
+    - name: Add current user to docker group
+      become: true
+      ansible.builtin.user:
+        name: "{{ current_logged_in_user }}"
+        groups: docker
+        append: yes
