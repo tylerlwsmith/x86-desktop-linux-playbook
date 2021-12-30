@@ -49,6 +49,7 @@
         name:
           - terminator
           - vim
+	  - jq
 
     - name: Create projects directory
       ansible.builtin.file:

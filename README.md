@@ -2,7 +2,7 @@
 
 This Ansible Playbook sets up a new x86 desktop Linux machine for development. Nuking-and-paving laptops and setting up VMs was getting tedious, so I wanted to automate the process.
 
-The Playbook installs Node.js, Yarn, Docker, Docker Compose, VS Code + extensions, TLDR, Ansible, VIM, and Terminator. It also creates a `~/projects/` and `~/contributions/` directory for storing code.
+The Playbook installs Node.js, Yarn, Docker, Docker Compose, VS Code + extensions, TLDR, Ansible, VIM, jq, and Terminator. It also creates a `~/projects/` and `~/contributions/` directory for storing code.
 
 ## Installing the Playbook dependencies
 
