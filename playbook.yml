@@ -50,7 +50,7 @@
         name:
           - terminator
           - vim
-	  - jq
+          - jq
 
     - name: Create projects directory
       ansible.builtin.file:
